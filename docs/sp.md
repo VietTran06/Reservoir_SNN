@@ -201,16 +201,16 @@ class ReservoirSNN:
     def __init__(self, n_neurons=128, n_inputs=14, sparsity=0.12,
                  v_th=4.0, n_dt_bins=64, dt_range=(0.01, 10000.0), seed=36,
                  res_shift=2):
-            """
-                n_neurons:	số neuron Reservoir
-                n_inputs:	số input feature sau encoding
-                sparsity:	độ thưa của W_res
-                v_th:	ngưỡng firing
-                n_dt_bins:	số bin Δt
-                dt_range:	khoảng Δt
-                seed:	random seed
-                res_shift:	mức giảm recurrent weight
-            """
+        """
+            n_neurons:	số neuron Reservoir
+            n_inputs:	số input feature sau encoding
+            sparsity:	độ thưa của W_res
+            v_th:	ngưỡng firing
+            n_dt_bins:	số bin Δt
+            dt_range:	khoảng Δt
+            seed:	random seed
+            res_shift:	mức giảm recurrent weight
+        """
         self.N = n_neurons
         self.v_th = v_th    
         self.seed = seed
@@ -273,7 +273,7 @@ class ReservoirSNN:
         dir_all = flow_features[:, 2].astype(np.float64)
 
         # Input 14 chiều
-        X = np.zeros((n_steps, n_inputs), dtype=np.float64)
+        X = np.zeros((n_steps, 14), dtype=np.float64)
         
         #Encoding 
         X[:, 0] = (length_all >= 70)
@@ -404,7 +404,7 @@ def get_kmeans_prototypes_and_test_idx(all_states_over_time, labels, n_shots=10,
 def continuous_few_shot_accuracy(all_states_over_time, labels, n_shots=10):
     prototypes, test_idx = get_kmeans_prototypes_and_test_idx(all_states_over_time, labels, n_shots)
     if not test_idx or not prototypes:
-        return 0.0, 0.0
+        return 0.0
         
     labels_arr = np.array(labels)
     correct = 0 #Đếm class đúng
@@ -455,15 +455,15 @@ def run_reservoir_on_all_flows(flows, reservoir):
 def search_best_seed(flows, labels, seeds,
                      n_neurons=128, sparsity=0.12,
                      n_shots=5, res_shifts=[2, 3]):
-                     """
-                        flows:	Danh sách các flow mạng
-                        labels:	Nhãn tương ứng của từng flow
-                        seeds:	Danh sách seed muốn thử
-                        n_neurons:	Số neuron Reservoir
-                        sparsity:	Độ thưa của ma trận recurrent
-                        n_shots:	Số prototype tối đa mỗi lớp
-                        res_shifts:	Các giá trị scaling recurrent
-                    """
+    """
+        flows:	Danh sách các flow mạng
+        labels:	Nhãn tương ứng của từng flow
+        seeds:	Danh sách seed muốn thử
+        n_neurons:	Số neuron Reservoir
+        sparsity:	Độ thưa của ma trận recurrent
+        n_shots:	Số prototype tối đa mỗi lớp
+        res_shifts:	Các giá trị scaling recurrent
+    """
     configs = [(s, r) for s in seeds for r in res_shifts] # Danh sách cấu hình
     total = len(configs) # Tổng cấu hình
     print(f"\n{'=' * 60}")
@@ -492,10 +492,10 @@ def search_best_seed(flows, labels, seeds,
         #Chạy mạng neurons trên toàn bộ flows
         final_states, all_states = run_reservoir_on_all_flows(flows, reservoir)
 
-        kq = kernel_quality(final_states, labels) #Tính KQ
+        kq = kernel_quality(final_states, labels) #Tính KQ / final_states
         acc = continuous_few_shot_accuracy( 
             all_states, labels, n_shots=n_shots
-        ) #Tính acc / fewshot 
+        ) #Tính acc / fewshot
 
         results.append({
             'seed': seed,
