@@ -364,7 +364,7 @@
 
 <ul>
 <li>
-<p>Mạng Reservoir SNN sử dụng LIF chuẩn:</p>
+<p><strong>Mạng Reservoir SNN sử dụng LIF chuẩn:</strong></p>
 <div class="arithmatex">\[
 V[t] = \lambda V[t-1] + W_{in}x[t] + W_{res}s[t-1]
 \]</div>
@@ -399,7 +399,7 @@ V ← V·exp(−Δt/τ) (= V.λ)
 </ul>
 </li>
 <li>
-<p>Một flow được biểu diễn dưới dạng:</p>
+<p><strong>Một flow được biểu diễn dưới dạng:</strong></p>
 <div class="arithmatex">\[
 F = \{p_1,p_2,\ldots,p_T\}
 \]</div>
@@ -461,6 +461,33 @@ sim(q,p)
 \frac{q\cdot p}
 {\|q\|\|p\|}
 \]</div>
+</li>
+<li>
+<p><strong>Kernel Quality:</strong> Sử dụng trạng thái tích lũy cuối cùng <span class="arithmatex">\(z_T\)</span>
+    $$
+    F\longrightarrow z_T\longrightarrow\text{Ridge Classifier}
+    $$</p>
+<ul>
+<li><strong>Ridge Classifier:</strong> Khi có n &gt; 1 label, RC sẽ tạo n hàm tuyến tính để tính theo kiểu score
+    $$
+    \mathbf{score}(x)=W x+\mathbf{b}
+    $$
+    $$
+    \hat y=\arg\max_{k\in{1,\ldots,n}}score_k(x)
+    $$</li>
+</ul>
+</li>
+<li>
+<p><strong>Few-shot Prototype:</strong> sử dụng trung bình các state hợp lệ từ state thứ tư trở đi rồi gom cụm bằng K-means
+    $$
+    Z_F\longrightarrow\bar z_F\longrightarrow\text{K-means}
+    $$</p>
+</li>
+<li>
+<p><strong>Classification:</strong> Dùng từng state của luồng kiểm tra để tính cosine similarity với toàn bộ prototype
+    $$
+    z_t\longrightarrow\text{Cosine Similarity}\longrightarrow\hat y_t
+    $$</p>
 </li>
 </ul>
 

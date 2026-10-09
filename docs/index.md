@@ -3,6 +3,6 @@
 ## Main Components
 
 - Mục tiêu
-- Cơ sở lý thuyết
-- Software Programming
-- Hardware Design
+- [Cơ sở lý thuyết](TheoreticalBasis.md)
+- [Software Programming](sp.md)
+- [Hardware Design](hd.md)
