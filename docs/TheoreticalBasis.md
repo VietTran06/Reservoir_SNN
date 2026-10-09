@@ -1,4 +1,4 @@
-- Mạng Reservoir SNN sử dụng LIF chuẩn:
+- **Mạng Reservoir SNN sử dụng LIF chuẩn:**
 
     $$
     V[t] = \lambda V[t-1] + W_{in}x[t] + W_{res}s[t-1]
@@ -30,7 +30,7 @@
         \tau = [10, 50, 200, 1000]
         $$
 
-- Một flow được biểu diễn dưới dạng:
+- **Một flow được biểu diễn dưới dạng:**
 
     $$
     F = \{p_1,p_2,\ldots,p_T\}
@@ -89,3 +89,25 @@
     {\|q\|\|p\|}
     $$
 
+- **Kernel Quality:** Sử dụng trạng thái tích lũy cuối cùng \(z_T\)
+    $$
+    F\longrightarrow z_T\longrightarrow\text{Ridge Classifier}
+    $$
+
+    - **Ridge Classifier:** Khi có n > 1 label, RC sẽ tạo n hàm tuyến tính để tính theo kiểu score
+        $$
+        \mathbf{score}(x)=W x+\mathbf{b}
+        $$
+        $$
+        \hat y=\arg\max_{k\in\{1,\ldots,n\}}score_k(x)
+        $$
+
+- **Few-shot Prototype:** sử dụng trung bình các state hợp lệ từ state thứ tư trở đi rồi gom cụm bằng K-means
+    $$
+    Z_F\longrightarrow\bar z_F\longrightarrow\text{K-means}
+    $$
+
+- **Classification:** Dùng từng state của luồng kiểm tra để tính cosine similarity với toàn bộ prototype
+    $$
+    z_t\longrightarrow\text{Cosine Similarity}\longrightarrow\hat y_t
+    $$

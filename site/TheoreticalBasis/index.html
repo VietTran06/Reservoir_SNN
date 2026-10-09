@@ -363,8 +363,8 @@
   <h1>Cơ sở lý thuyết</h1>
 
 <ul>
-<li>Mạng Reservoir SNN sử dụng LIF chuẩn:</li>
-</ul>
+<li>
+<p>Mạng Reservoir SNN sử dụng LIF chuẩn:</p>
 <div class="arithmatex">\[
 V[t] = \lambda V[t-1] + W_{in}x[t] + W_{res}s[t-1]
 \]</div>
@@ -372,38 +372,58 @@ V[t] = \lambda V[t-1] + W_{in}x[t] + W_{res}s[t-1]
 s[t] =
 \begin{cases}
 1, &amp; \text{if } V[t] &gt; V_{th} \\
-0, &amp; \text{o.w }
+0, &amp; \text{otherwise}
 \end{cases}
 \]</div>
-<p>+Sau khi phát spike, neuron thực hiện <strong>soft-reset</strong>:</p>
+<ul>
+<li>
+<p>Sau khi phát spike, neuron thực hiện <strong>soft-reset</strong>:</p>
 <div class="arithmatex">\[
 V[t] \leftarrow V[t] - V_{th}
 \]</div>
-<ul>
-<li>λ (hệ số rò rỉ):</li>
+</li>
 </ul>
+</li>
+<li>
+<p><strong>Hệ số rò rỉ <span class="arithmatex">\(\lambda\)</span>:</strong></p>
 <div class="arithmatex">\[
 V ← V·exp(−Δt/τ) (= V.λ)
 \]</div>
-<p>+exp(−Δt/τ) ~ λ tính sẵn trong 1 bảng LUT với 4 tham số τ khác nhau cho mỗi 1/4 neurons: τ  = [10, 50, 200, 1000]</p>
 <ul>
-<li>Một flow dạng 
-$$ 
-F = {p_1,p_2,\ldots,p_T}
-$$</li>
+<li>
+<p>Giá trị <span class="arithmatex">\(\lambda\)</span> được tính sẵn trong bảng LUT với 4 tham số <span class="arithmatex">\(\tau\)</span> khác nhau cho mỗi nhóm <span class="arithmatex">\(1/4\)</span> số neuron:</p>
+<div class="arithmatex">\[
+\tau = [10, 50, 200, 1000]
+\]</div>
+</li>
 </ul>
-<p>+với thời gian xuất hiện:</p>
+</li>
+<li>
+<p>Một flow được biểu diễn dưới dạng:</p>
+<div class="arithmatex">\[
+F = \{p_1,p_2,\ldots,p_T\}
+\]</div>
+<ul>
+<li>
+<p>Với thời gian xuất hiện của các packet:</p>
 <div class="arithmatex">\[
 t_1,t_2,\ldots,t_T
 \]</div>
+</li>
+<li>
+<p>Khoảng thời gian giữa hai packet liên tiếp:</p>
 <div class="arithmatex">\[
-\Delta t_i=t_i-t_{i-1}
+\Delta t_i = t_i - t_{i-1}
 \]</div>
-<ul>
-<li>Đầu vào là chuỗi 14 số {0, 1} dựa trên 3 đặc trưng [Δt,length,direction]:</li>
+</li>
 </ul>
-<p>+Với packet length:
-$$
+</li>
+<li>
+<p><strong>Đầu vào:</strong> Chuỗi 14 giá trị nhị phân <span class="arithmatex">\(\{0,1\}\)</span>, được tạo từ 3 đặc trưng <span class="arithmatex">\([\Delta t, length, direction]\)</span>.</p>
+<ul>
+<li>
+<p><strong>Packet length:</strong></p>
+<div class="arithmatex">\[
 x_L =
 [
 L&gt;\theta_1,\,
@@ -411,9 +431,11 @@ L&gt;\theta_2,\,
 \ldots,\,
 L&gt;\theta_6
 ]
-$$
-+Với thời gian giữa 2 packet:
-$$
+\]</div>
+</li>
+<li>
+<p><strong>Thời gian giữa hai packet:</strong></p>
+<div class="arithmatex">\[
 x_{\Delta t} =
 [
 \Delta t&gt;\tau_1,\,
@@ -421,19 +443,25 @@ x_{\Delta t} =
 \ldots,\,
 \Delta t&gt;\tau_6
 ]
-$$
-+Hướng truyền:
-$$
-x_{dir}\in{0,1}
-$$</p>
-<ul>
-<li>Cosine  Similarity:
-$$
+\]</div>
+</li>
+<li>
+<p><strong>Hướng truyền:</strong></p>
+<div class="arithmatex">\[
+x_{dir}\in\{0,1\}
+\]</div>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Cosine Similarity:</strong></p>
+<div class="arithmatex">\[
 sim(q,p)
 =
 \frac{q\cdot p}
-{|q||p|}
-$$</li>
+{\|q\|\|p\|}
+\]</div>
+</li>
 </ul>
 
 
