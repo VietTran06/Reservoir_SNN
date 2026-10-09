@@ -401,7 +401,7 @@ def get_kmeans_prototypes_and_test_idx(all_states_over_time, labels, n_shots=10,
 
 - Hàm dùng fewshot phân loại class
 ```python
-def continuous_few_shot_accuracy(final_states, all_states_over_time, labels, n_shots=10):
+def continuous_few_shot_accuracy(all_states_over_time, labels, n_shots=10):
     prototypes, test_idx = get_kmeans_prototypes_and_test_idx(all_states_over_time, labels, n_shots)
     if not test_idx or not prototypes:
         return 0.0, 0.0
@@ -455,7 +455,8 @@ def run_reservoir_on_all_flows(flows, reservoir):
 def search_best_seed(flows, labels, seeds,
                      n_neurons=128, sparsity=0.12,
                      n_shots=5, res_shifts=[2, 3]):
-                     """flows:	Danh sách các flow mạng
+                     """
+                        flows:	Danh sách các flow mạng
                         labels:	Nhãn tương ứng của từng flow
                         seeds:	Danh sách seed muốn thử
                         n_neurons:	Số neuron Reservoir
@@ -493,7 +494,7 @@ def search_best_seed(flows, labels, seeds,
 
         kq = kernel_quality(final_states, labels) #Tính KQ
         acc = continuous_few_shot_accuracy( 
-            final_states, all_states, labels, n_shots=n_shots
+            all_states, labels, n_shots=n_shots
         ) #Tính acc / fewshot 
 
         results.append({
