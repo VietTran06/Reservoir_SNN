@@ -68,7 +68,7 @@ def parse_pcap(stream, filename, max_packets=50000):
                     continue
                 
                 ip = eth.data
-                #Lấy packet có transport protocol là TCP hoặc UDP - Mục đích loại bỏ nhiễu do các gói tin không phải do người dùng tạo ra
+                #Lấy packet có transport protocol là TCP hoặc UDP
                 if isinstance(ip.data, (dpkt.tcp.TCP, dpkt.udp.UDP)):
                     packets.append((
                         float(ts), #timestamp

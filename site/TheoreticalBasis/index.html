@@ -371,11 +371,11 @@ V[t] = \lambda V[t-1] + W_{in}x[t] + W_{res}s[t-1]
 <div class="arithmatex">\[
 s[t] =
 \begin{cases}
-1, &amp; \text{nếu } V[t] &gt; V_{th} \\
-0, &amp; \text{ngược lại}
+1, &amp; \text{if } V[t] &gt; V_{th} \\
+0, &amp; \text{o.w }
 \end{cases}
 \]</div>
-<p>Sau khi phát spike, neuron thực hiện <strong>soft-reset</strong>:</p>
+<p>+Sau khi phát spike, neuron thực hiện <strong>soft-reset</strong>:</p>
 <div class="arithmatex">\[
 V[t] \leftarrow V[t] - V_{th}
 \]</div>
@@ -383,9 +383,58 @@ V[t] \leftarrow V[t] - V_{th}
 <li>λ (hệ số rò rỉ):</li>
 </ul>
 <div class="arithmatex">\[
-V ← V·exp(−Δt/τ)
+V ← V·exp(−Δt/τ) (= V.λ)
 \]</div>
-<p>Δt tính sẵn trong 1 bảng LUT với 4 tham số τ khác nhau cho mỗi 1/4 neurons: τ  = [10, 50, 200, 1000]</p>
+<p>+exp(−Δt/τ) ~ λ tính sẵn trong 1 bảng LUT với 4 tham số τ khác nhau cho mỗi 1/4 neurons: τ  = [10, 50, 200, 1000]</p>
+<ul>
+<li>Một flow dạng 
+$$ 
+F = {p_1,p_2,\ldots,p_T}
+$$</li>
+</ul>
+<p>+với thời gian xuất hiện:</p>
+<div class="arithmatex">\[
+t_1,t_2,\ldots,t_T
+\]</div>
+<div class="arithmatex">\[
+\Delta t_i=t_i-t_{i-1}
+\]</div>
+<ul>
+<li>Đầu vào là chuỗi 14 số {0, 1} dựa trên 3 đặc trưng [Δt,length,direction]:</li>
+</ul>
+<p>+Với thời gian giữa 2 packet:
+$$
+x_{\Delta t} =
+[
+\Delta t&gt;\tau_1,\,
+\Delta t&gt;\tau_2,\,
+\ldots,\,
+\Delta t&gt;\tau_6
+]
+$$
++Với packet length:
+$$
+x_L =
+[
+L&gt;\theta_1,\,
+L&gt;\theta_2,\,
+\ldots,\,
+L&gt;\theta_6
+]
+$$
++Hướng truyền:
+$$
+x_{dir}\in{0,1}
+$$</p>
+<ul>
+<li>Cosine  Similarity:
+$$
+sim(q,p)
+=
+\frac{q\cdot p}
+{|q||p|}
+$$</li>
+</ul>
 
 
 

@@ -44,16 +44,6 @@ $$
 
 - Đầu vào là chuỗi 14 số {0, 1} dựa trên 3 đặc trưng [Δt,length,direction]:
 
-+Với thời gian giữa 2 packet:
-$$
-x_{\Delta t} =
-[
-\Delta t>\tau_1,\,
-\Delta t>\tau_2,\,
-\ldots,\,
-\Delta t>\tau_6
-]
-$$
 +Với packet length:
 $$
 x_L =
@@ -62,6 +52,16 @@ L>\theta_1,\,
 L>\theta_2,\,
 \ldots,\,
 L>\theta_6
+]
+$$
++Với thời gian giữa 2 packet:
+$$
+x_{\Delta t} =
+[
+\Delta t>\tau_1,\,
+\Delta t>\tau_2,\,
+\ldots,\,
+\Delta t>\tau_6
 ]
 $$
 +Hướng truyền:
